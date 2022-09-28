@@ -212,8 +212,10 @@
 				} else if (input.name == 'status' && input.value == 'Belum Menikah') {
 					jmlAnak.style.display = "none"
 				}
-				const err = document.querySelector(`#err${input.name}`);
-				err.style.display = "none";
+				if (input.name != "jumlahAnak") {
+					const err = document.querySelector(`#err${input.name}`);
+					err.style.display = "none";
+				}
 			});
 		}
 		btnSave.addEventListener("click", () => {
