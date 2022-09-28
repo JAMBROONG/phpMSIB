@@ -20,7 +20,7 @@
 							<div class="form-floating mb-3">
 								<input class="form-control" id="namaPegawai" name="namaPegawai" type="text" placeholder="Nama Pegawai" data-sb-validations="required" />
 								<label for="namaPegawai">Nama Pegawai</label>
-								<div class="invalid-feedback" id="errNama">Nama Pegawai wajib diisi!.</div>
+								<div class="invalid-feedback" id="errnamaPegawai">Nama Pegawai wajib diisi!.</div>
 							</div>
 							<div class="form-floating mb-3">
 								<select class="form-select" id="agama" name="agama" aria-label="Agama">
@@ -32,7 +32,7 @@
 									<option value="Konghuchu">Konghuchu</option>
 								</select>
 								<label for="agama">Agama</label>
-								<div class="invalid-feedback" id="errAgama">Pilih salah satu!.</div>
+								<div class="invalid-feedback" id="erragama">Pilih salah satu!.</div>
 							</div>
 							<div class="mb-3">
 								<label class="form-label d-block">Jabatan</label>
@@ -52,7 +52,7 @@
 									<input class="form-check-input" id="staff" type="radio" name="jabatan" value="Staff" data-sb-validations="required" />
 									<label class="form-check-label" for="staff">Staff</label>
 								</div>
-								<div class="invalid-feedback" id="errJabatan">Pilih salah satu!.</div>
+								<div class="invalid-feedback" id="errjabatan">Pilih salah satu!.</div>
 							</div>
 							<div class="mb-3">
 								<label class="form-label d-block">Status</label>
@@ -64,14 +64,14 @@
 									<input class="form-check-input" id="belum" type="radio" name="status" value="Belum Menikah" data-sb-validations="required" />
 									<label class="form-check-label" for="belum">Belum</label>
 								</div>
-								<div class="invalid-feedback" id="errStatus">Pilih salah satu!.</div>
+								<div class="invalid-feedback" id="errstatus">Pilih salah satu!.</div>
 							</div>
 							<div class="form-floating mb-3" id="jmlAnak">
 								<input class="form-control" id="jumlahAnak" name="jumlahAnak" type="text" placeholder="Jumlah Anak" data-sb-validations="required" />
 								<label for="jumlahAnak">Jumlah Anak</label>
 							</div>
 							<div class="d-grid">
-								<button class="btn btn-primary btn-lg" name="submit" type="button" id="btnSave">Simpan</button>
+								<button class="btn btn-primary btn-lg" type="button" name="submit" id="btnSave">Simpan</button>
 							</div>
 						</form>
 					</div>
@@ -88,11 +88,21 @@
 		$jumlahAnak = ($status == "Menikah") ? $_POST['jumlahAnak'] : 0;
 
 		switch ($jabatan) {
-			case 'Manager': $gapok = 20000000; break;
-			case 'Asisten': $gapok = 15000000; break;
-			case 'Kabag': $gapok = 10000000; break;
-			case 'Staff': $gapok = 4000000; break;
-			default: $gapok = 0; break;
+			case 'Manager':
+				$gapok = 20000000;
+				break;
+			case 'Asisten':
+				$gapok = 15000000;
+				break;
+			case 'Kabag':
+				$gapok = 10000000;
+				break;
+			case 'Staff':
+				$gapok = 4000000;
+				break;
+			default:
+				$gapok = 0;
+				break;
 		}
 
 		$tunjab = 0.2 * $gapok;
@@ -202,28 +212,41 @@
 				} else if (input.name == 'status' && input.value == 'Belum Menikah') {
 					jmlAnak.style.display = "none"
 				}
-				if (input.name == 'namaPegawai') document.querySelector("#errNama").style.display = "none";
-				else if (input.name == 'agama') document.querySelector("#errAgama").style.display = "none";
-				else if (input.name == 'jabatan') document.querySelector("#errJabatan").style.display = "none";
-				else if (input.name == 'status') document.querySelector("#errStatus").style.display = "none";
-				else if (input.name == 'jumlahAnak') jmlAnak.style.display = "block";
+				const err = document.querySelector(`#err${input.name}`);
+				err.style.display = "none";
 			});
 		}
 		btnSave.addEventListener("click", () => {
-			let jabatan = false;
-			let status = false;
 			let check = true;
-			for (const item of form.jabatan) {
-				if (item.checked) jabatan = true;
+			for (const input of form) {
+				const err = document.querySelector(`#err${input.name}`);
+				console.log(input.name);
+				if (input.name == "jabatan") {
+					let jabatan = false;
+					for (const item of form.jabatan) {
+						if (item.checked) jabatan = true;
+					}
+					if (!jabatan) {
+						err.style.display = "block";
+						check = false;
+					}
+				} else if (input.name == "status") {
+					let status = false;
+					for (const item of form.status) {
+						if (item.checked) status = true;
+					}
+					if (!status) {
+						err.style.display = "block";
+						check = false;
+					}
+				} else {
+					if (input.value == "" && input.name != "jumlahAnak" && input.name != "submit") {
+						err.style.display = "block";
+						check = false;
+					}
+				}
 			}
-			for (const item of form.status) {
-				if (item.checked) status = true;
-			}
-			if (form.namaPegawai.value == "") {document.querySelector("#errNama").style.display = "block"; check = false;}
-			if (form.agama.value == "") {document.querySelector("#errAgama").style.display = "block"; check = false;}
-			if (!jabatan) {document.querySelector("#errJabatan").style.display = "block"; check = false;}
-			if (!status) {document.querySelector("#errStatus").style.display = "block"; check = false;}
-			if(check) return document.createElement('form').submit.call(form);
+			if (check) return document.createElement('form').submit.call(form);
 		});
 	</script>
 </body>
