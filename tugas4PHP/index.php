@@ -52,8 +52,25 @@
 	]
 	?>
 	<div class="container">
-		<div class="row">
-		<?php
+		<h2 class="text-center mt-4 mb-4"><?= Pegawai::PT ?></h2>
+		<table class="table table-bordered table-striped table-dark">
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>NIP</th>
+					<th>Nama Pegawai</th>
+					<th>Jabatan</th>
+					<th>Agama</th>
+					<th>Status</th>
+					<th>Gaji Pokok</th>
+					<th>Tunjangan Jabatan</th>
+					<th>Tunjangan Keluarga</th>
+					<th>Zakat Profesi</th>
+					<th>Gaji Bersih</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
 				foreach ($data as $pg) {
 					$nip = $pg['nip'];
 					$nama = $pg['nama'];
@@ -65,7 +82,13 @@
 					$pegawai->mencetak();
 				}
 				?>
-		</div>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="11" class="text-center">Jumlah Pegawai : <?= Pegawai::$no - 1 ?></th>
+				</tr>
+			</tfoot>
+		</table>
 	</div>
 </body>
 
