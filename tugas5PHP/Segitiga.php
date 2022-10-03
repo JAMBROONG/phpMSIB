@@ -37,8 +37,7 @@ class Segitiga extends Bentuk2D
     {
         return "
         Alas : ".$this->alas."<br>
-        Tinggi : ".$this->tinggi()."
-        ";
+        Tinggi : ".$this->tinggi();
     }
 }
 
