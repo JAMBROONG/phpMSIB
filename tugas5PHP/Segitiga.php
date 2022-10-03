@@ -19,7 +19,7 @@ class Segitiga extends Bentuk2D
 
     public function luasBidang()
     {
-        $luas = 0.5 * $this->alas * $this->tinggi;
+        $luas = ($this->alas * $this->tinggi) / 2;
         return number_format($luas, 2);
     }
 
