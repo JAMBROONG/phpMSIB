@@ -4,11 +4,9 @@ require_once "Bentuk2D.php";
 class Segitiga extends Bentuk2D
 {
     public $alas;
-    public $tinggi;
-    public function __construct($alas, $tinggi)
+    public function __construct($alas)
     {
         $this->alas = $alas;
-        $this->tinggi = $tinggi;
     }
 
     public function namaBidang()
@@ -17,9 +15,16 @@ class Segitiga extends Bentuk2D
         return $nama;
     }
 
+    public function tinggi()
+    {
+        $s2 = pow($this->alas, 2) - pow($this->alas / 2, 2);
+        $tinggi = sqrt($s2);
+        return $tinggi;
+    }
+
     public function luasBidang()
     {
-        $luas = 0.5 * $this->alas * $this->tinggi;
+        $luas = 0.5 * $this->alas * $this->tinggi();
         return $luas;
     }
 
@@ -32,7 +37,7 @@ class Segitiga extends Bentuk2D
     {
         return "
         Alas : ".$this->alas."<br>
-        Tinggi : ".$this->tinggi."
+        Tinggi : ".$this->tinggi()."
         ";
     }
 }

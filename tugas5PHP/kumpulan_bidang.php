@@ -32,7 +32,7 @@
                 <?php
                 $pp = new PersegiPanjang(10, 5);
                 $lk = new Lingkaran(14);
-                $sg = new Segitiga(12, 24);
+                $sg = new Segitiga(8);
 
                 $bentuk = [$pp, $lk, $sg];
                 $no = 1;
