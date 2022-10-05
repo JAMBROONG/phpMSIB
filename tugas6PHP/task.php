@@ -1,7 +1,7 @@
 <!-- Portfolio Grid-->
 <section class="page-section bg-light" id="portfolio">
 	<div class="container">
-		<div class="text-center" data-aos="fade-down">
+		<div class="text-center" data-aos="fade-down" data-aos-duration="500">
 			<h2 class="section-heading text-uppercase">My Task</h2>
 			<h3 class="section-subheading text-muted">All the tasks I have done</h3>
 		</div>
@@ -34,9 +34,11 @@
 					"img" => "assets/img/portfolio/github.webp"
 				],
 			];
-
-			foreach ($data as $key) { ?>
-				<div class="col-lg-4 col-sm-6 mb-4" data-aos="fade-up">
+			$no = 500;
+			foreach ($data as $key) { 
+				if ($no >= 1100) $no = 500;
+				?>
+				<div class="col-lg-4 col-sm-6 mb-4" data-aos="fade-up" data-aos-duration="<?= $no+=200?>">
 					<div class="portfolio-item">
 						<a class="portfolio-link taskCard" data-name="<?= $key['materi'] ?>">
 							<div class="portfolio-hover">
