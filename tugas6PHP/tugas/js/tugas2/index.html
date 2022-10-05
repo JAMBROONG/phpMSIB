@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Tugas 2 Javascript</title>
+	<style>
+		body {
+			background: pink;
+			font-family: Arial, Helvetica, sans-serif;
+			text-align: center;
+		}
+
+		table * {
+			white-space: nowrap;
+			border: 1px solid white;
+		}
+
+		thead {
+			position: sticky;
+			top: 0;
+			background: orange;
+		}
+
+		div {
+			display: block;
+			overflow-y: scroll;
+			max-height: 520px;
+			width: fit-content;
+			margin: 0 auto;
+			border: 1px solid white;
+			border-radius: 15px;
+		}
+
+		div::-webkit-scrollbar {
+			width: 10px;
+		}
+
+		div::-webkit-scrollbar-track {
+			background: #f1f1f1;
+			border-radius: 10px;
+		}
+
+		div::-webkit-scrollbar-thumb {
+			background: #bfbfbf;
+			border-radius: 10px;
+		}
+
+		div::-webkit-scrollbar-thumb:hover {
+			background: #a6a6a6;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>DAFTAR PEGAWAI</h1>
+	<div>
+		<table border cellpadding="10" cellspacing="0">
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>Nama</th>
+					<th>Jabatan</th>
+					<th>Agama</th>
+					<th>Gaji Pokok</th>
+					<th>Tunjangan Jabatan</th>
+					<th>Tunjangan Kesehatan</th>
+					<th>Gaji Kotor</th>
+					<th>Zakat Profesi</th>
+					<th>Take Home Pay</th>
+				</tr>
+			</thead>
+			<tbody align="center">
+				<script>
+					let jabatan, agama, gapok, tunjab, tunkes, gator, zakat, takeHome, warna;
+
+					for (let i = 1; i <= 100; i++) {
+						if (i <= 25 && i > 0) {
+							jabatan = "Manager"
+						} else if (i <= 50 && i > 25) {
+							jabatan = "Asisten Manager"
+						} else if (i <= 75 && i > 50) {
+							jabatan = "Supervisor"
+						} else {
+							jabatan = "Staff"
+						}
+
+						switch (jabatan) {
+							case "Manager":
+								gapok = 15000000;
+								break;
+							case "Asisten Manager":
+								gapok = 10000000;
+								break;
+							case "Supervisor":
+								gapok = 7000000;
+								break;
+							case "Staff":
+								gapok = 4000000;
+								break;
+							default:
+								gapok = 0;
+								break;
+						}
+
+						tunjab = (gapok * 20) / 100;
+						tunkes = (gapok * 10) / 100;
+						gator = gapok + tunjab + tunkes;
+
+						agama = (i % 2 < 1) ? "Non Muslim" : "Muslim";
+						warna = (agama == "Non Muslim") ? "lightblue" : "yellow";
+						zakat = (agama == "Muslim" && gator >= 7000000) ? (gator * 2.5) / 100 : 0;
+						takeHome = gator - zakat;
+
+						document.write(`
+							<tr bgcolor="${warna}">
+									<td>${i}</td>
+									<td>Pegawai${i}</td>
+									<td>${jabatan}</td>
+									<td>${agama}</td>
+									<td align="right">${gapok}</td>
+									<td align="right">${tunjab}</td>
+									<td align="right">${tunkes}</td>
+									<td align="right">${gator}</td>
+									<td align="right">${zakat}</td>
+									<td align="right">${takeHome}</td>
+							</tr>
+						`);
+					}
+				</script>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>

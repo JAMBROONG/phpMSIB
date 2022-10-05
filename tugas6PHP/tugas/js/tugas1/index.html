@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tugas 1 Javascript</title>
+</head>
+
+<body>
+    
+    <script>
+        let pegawai = "Ridwan",
+            jabatan = "Manager",
+            status = "Menikah",
+            gapok,
+            tunjanganJabatan,
+            tunjanganKeluarga,
+            bpjs,
+            totalGaji;
+
+        if (jabatan == "Manager") {
+            gapok = 15000000;
+        } else if (jabatan == "Asisten Manager") {
+            gapok = 10000000;
+        } else {
+            gapok = 5000000;
+        }
+
+        tunjanganJabatan = (gapok * 15) / 100;
+        bpjs = (gapok * 10) / 100;
+        tunjanganKeluarga = status == "Menikah" ? (gapok * 20) / 100 : 0;
+        totalGaji = gapok + tunjanganJabatan + bpjs + tunjanganKeluarga;
+
+        document.write(`
+        <h4>
+            Nama Pegawai: ${pegawai} <br>
+            Jabatan: ${jabatan} <br>
+            Status: ${status}
+        </h4>
+        <table border="1" cellpadding="10" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Data Gaji</th>
+                    <th>Nominal Gaji</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Gaji Pokok</td>
+                    <td align="right">${gapok}</td>
+                </tr>
+                <tr>
+                    <td>Tunjangan Jabatan</td>
+                    <td align="right">${tunjanganJabatan}</td>
+                </tr>
+                <tr>
+                    <td>Tunjangan Keluarga</td>
+                    <td align="right">${tunjanganKeluarga}</td>
+                </tr>
+                <tr>
+                    <td>BPJS</td>
+                    <td align="right">${bpjs}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th align="left">Total Gaji</th>
+                    <th align="right">${totalGaji}</th>
+                </tr>
+            </tfoot>
+        </table>
+            `);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tugas 6 JavaScript</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h2 class="text-center mt-5 mb-5">Informasi Gempa</h2>
+		<div class="row">
+			<div class="col-md-9">
+				<table class="table table-bordered table-striped text-center">
+					<thead>
+						<tr>
+							<th>No</th>
+							<th>Lokasi</th>
+							<th>Skala</th>
+							<th>Dampak</th>
+						</tr>
+					</thead>
+					<tbody id="tampil">
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-3">
+				<div class="card">
+					<div class="card-header">
+						<h6><b>Tambah Data Gempa</b></h6>
+					</div>
+					<div class="card-body">
+						<form id="form" autocomplete="off">
+							<div class="mb-3">
+								<label for="lokasi" class="form-label">Lokasi Gempa</label>
+								<input type="text" class="form-control" id="lokasi" name="lokasi">
+							</div>
+							<div class="mb-3">
+								<label for="skala" class="form-label">Skala Gempa</label>
+								<input type="text" class="form-control" id="skala" name="skala">
+							</div>
+							<div class="mb-3">
+								<button type="button" class="btn btn-primary" onclick="tambahData()">Tambah
+									Data</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+		crossorigin="anonymous"></script>
+	<script>
+		let tampil = document.querySelector('#tampil'),
+			no = 1;
+		class Gempa {
+			constructor(lokasi, skala) {
+				this.lokasi = lokasi;
+				this.skala = skala;
+			}
+
+			setDampak() {
+				if (this.skala <= 2) return this.dampak = "Tidak terasa";
+				if (this.skala <= 4) return this.dampak = "Bangunan retak";
+				if (this.skala <= 6) return this.dampak = "Bangunan roboh";
+				return this.dampak = "Bangunan roboh dan berpotensi tsunami";
+			}
+
+			infoGempa() {
+				tampil.innerHTML += `
+					<tr>
+							<td>${no++}</td>
+							<td>${this.lokasi}</td>
+							<td>${this.skala}</td>
+							<td>${this.setDampak()}</td>
+					</tr>
+				`;
+			}
+		}
+
+		const data = [
+			{ lokasi: "Aceh", skala: 5 },
+			{ lokasi: "Palu", skala: 7 },
+			{ lokasi: "Jakarta", skala: 1 },
+			{ lokasi: "Cirebon", skala: 3 },
+			{ lokasi: "Semarang", skala: 2 },
+			{ lokasi: "Bandung", skala: 5 },
+			{ lokasi: "Surabaya", skala: 2 },
+			{ lokasi: "Medan", skala: 3 },
+			{ lokasi: "Lampung", skala: 9 },
+			{ lokasi: "Sampit", skala: 5 }
+		];
+
+		for (const item of data) {
+			const gempa = new Gempa(item.lokasi, item.skala);
+			gempa.infoGempa();
+		}
+
+		const tambahData = () => {
+			const form = document.querySelector('#form'),
+				lokasi = form.lokasi.value,
+				skala = form.skala.value,
+				gempa = new Gempa(lokasi, skala);
+			gempa.infoGempa();
+			data.push({ lokasi: lokasi, skala: skala });
+		}
+
+	</script>
+</body>
+</html>
