@@ -60,6 +60,7 @@
 			<div class="modal-content">
 				<div class="close-modal" data-bs-dismiss="modal" style="font-size: 30px;"><i class="fas fa-times"></i></div>
 				<div class="modal-body">
+					<div class="head"></div>
 					<ul class="row justify-content-center tampil">
 
 					</ul>

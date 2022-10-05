@@ -6,10 +6,12 @@ window.addEventListener('load', function () {
 
     const taskCard = document.querySelectorAll('.taskCard');
     const tampil = document.querySelector('.tampil');
+    const judul = document.querySelector('.head');
     for (const card of taskCard) {
         card.addEventListener('click', () => {
             const nama = card.getAttribute('data-name');
-            tampil.innerHTML += `<h2 style="margin-top: -50px; margin-bottom: 20px;">${nama}</h2>`;
+            tampil.innerHTML = '';
+            judul.innerHTML = `<h2 style="margin-top: -50px; margin-bottom: 20px;">${nama}</h2>`;
             let data;
             if (nama == "HTML") {
                 data = [
